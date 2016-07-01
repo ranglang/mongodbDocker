@@ -25,5 +25,6 @@ RUN chmod 777 /set_mongodb_password.sh
 RUN ls
 RUN ls -l /
 
+
 EXPOSE 27017
 CMD ["/run.sh"]
