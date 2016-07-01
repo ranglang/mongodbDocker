@@ -27,4 +27,4 @@ RUN ls -l /
 
 
 EXPOSE 27017
-CMD ["/run.sh"]
+CMD run.sh
