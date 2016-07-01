@@ -12,3 +12,4 @@ gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc \
 
 RUN ls
 RUN ls
+RUN ls
