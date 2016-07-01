@@ -12,5 +12,14 @@ RUN  cat  /etc/yum.repos.d/mongodb-org-3.2.repo
 #RUN yum update -y
 RUN yum install -y mongodb-org
 RUN mkdir -p /data/db
+VOLUME /data/db
+
+ENV AUTH yes
+ENV STORAGE_ENGINE wiredTiger
+ENV JOURNALING yes
+
+ADD run.sh /run.sh
+ADD set_mongodb_password.sh /set_mongodb_password.sh
+
 EXPOSE 27017
-ENTRYPOINT ["/usr/bin/mongod"]
+CMD ["/run.sh"]
