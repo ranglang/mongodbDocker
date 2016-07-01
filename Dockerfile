@@ -10,6 +10,8 @@ enabled=1 \
 gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc \
 ` > /etc/yum.repos.d/mongodb-org-3.2.repo
 
+RUN yum update -y
+RUN yum install -y mongodb-org
 RUN ls
 
 RUN ls
