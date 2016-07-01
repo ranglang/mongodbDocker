@@ -11,7 +11,6 @@ RUN echo "gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc">>/etc/yum.re
 RUN  cat  /etc/yum.repos.d/mongodb-org-3.2.repo
 #RUN yum update -y
 RUN yum install -y mongodb-org
-RUN ls
-
-RUN ls
-RUN ls
+RUN mkdir -p /data/db
+EXPOSE 27017
+ENTRYPOINT ["/usr/bin/mongod"]
