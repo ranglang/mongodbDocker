@@ -5,11 +5,28 @@ DATABASE=${MONGODB_DATABASE:-"admin"}
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
 
+ps aux |grep mongod
+
 echo "########################################################"
 echo ${USER}
 echo ${DATABASE}
 echo ${PASS}
 echo ${_word}
+
+RET=1
+while [[ RET -ne 0 ]]; do
+    echo "=> Waiting for confirmation of MongoDB service startup"
+    sleep 5
+    mongo admin --eval "help" >/dev/null 2>&1
+    RET=$?
+done
+
+ps aux |grep mongod |awk '{print $2}' |kill -9
+
+
+mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
+
+mongodb_cmd &
 
 RET=1
 while [[ RET -ne 0 ]]; do
