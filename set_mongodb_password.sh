@@ -21,7 +21,9 @@ while [[ RET -ne 0 ]]; do
     RET=$?
 done
 
-ps aux |grep mongod |awk '{print $2}' |kill -9
+ps -aux |grep mongod
+
+ps -aux |grep mongod |awk '{print $2}' |kill -9
 
 
 mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
