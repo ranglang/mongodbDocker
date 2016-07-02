@@ -25,6 +25,8 @@ WORKDIR /
 RUN chmod 777 /set_mongodb_password.sh
 RUN chmod 777 /run.sh
 
+RUN pwgen
+
 EXPOSE 27017
 
 CMD ./run.sh
