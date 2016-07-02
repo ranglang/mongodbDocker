@@ -43,6 +43,7 @@ db.createUser({user: 'rang', pwd: 'wozhiaini070507', roles:[{role:'readWrite',db
 EOF
 
 mongo admin -u $USER -p $PASS << EOF
+use local
 rs.initiate()
 EOF
 
