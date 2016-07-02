@@ -23,7 +23,7 @@ done
 
 ps -aux |grep mongod
 
-NUM=`ps -aux |grep mongod |awk '{print $5}'`
+NUM=`ps -aux |grep storageEngine |awk '{print $2}'`
 
 echo "returnnum: ${NUM}"
 kill ${num}
