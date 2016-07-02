@@ -23,15 +23,15 @@ done
 
 # ps -aux |grep mongod
 
-num = `ps -aux |grep mongod |awk '{print $4}'`
+NUM=`ps -aux |grep mongod |awk '{print $4}'`
 
-echo "returnnum: ${num}"
+echo "returnnum: ${NUM}"
 kill ${num}
-ps -aux |grep mongod |awk '{print $4}' |kill
+# ps -aux |grep mongod |awk '{print $4}' |kill
 
-mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
+# mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
 #
-$mongodb_cmd &
+# $mongodb_cmd &
 
 RET=1
 while [[ RET -ne 0 ]]; do
