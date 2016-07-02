@@ -33,8 +33,13 @@ fi
 
 
 mongo admin -u $USER -p $PASS << EOF
+use admin
+db.createUser({user: 'clusterAdmin', pwd: 'wozhiaini070507', roles:[{role:'clusterManager',db:'admin'},{role:'readAnyDatabase',db:'admin'}]})
+EOF
+
+mongo admin -u $USER -p $PASS << EOF
 use lqiong
-db.createUser({user: '$USER', pwd: '$PASS', roles:[{role:'clusterManager',db:'admin'},{role:'readAnyDatabase',db:'admin'}]})
+db.createUser({user: 'rang', pwd: 'wozhiaini070507', roles:[{role:'readWrite',db:'lqiong'}]})
 EOF
 
 echo "=> Done!"
