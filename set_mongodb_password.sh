@@ -21,7 +21,7 @@ while [[ RET -ne 0 ]]; do
     RET=$?
 done
 
-ps -aux |grep mongod
+ps -aux |grep storageEngine
 
 NUM=`ps -aux |grep storageEngine |awk '{print $2}'`
 
