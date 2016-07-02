@@ -23,7 +23,7 @@ done
 
 ps -aux |grep storageEngine
 
-NUM=`ps -aux |grep storageEngine |awk '{print $2}'`
+NUM=`ps -aux |grep "[s]torageEngine" |awk '{print $2}'`
 
 echo "returnnum: ${NUM}"
 kill ${num}
