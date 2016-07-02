@@ -69,6 +69,11 @@ use local
 rs.initiate()
 EOF
 
+mongo admin -u $USER -p $PASS << EOF
+use local
+rs.status()
+EOF
+
 echo "=> Done!"
 touch /data/db/.mongodb_password_set
 
