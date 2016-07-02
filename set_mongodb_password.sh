@@ -42,6 +42,10 @@ use lqiong
 db.createUser({user: 'rang', pwd: 'wozhiaini070507', roles:[{role:'readWrite',db:'lqiong'}]})
 EOF
 
+mongo admin -u $USER -p $PASS << EOF
+rs.initiate()
+EOF
+
 echo "=> Done!"
 touch /data/db/.mongodb_password_set
 
