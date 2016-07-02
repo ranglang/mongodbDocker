@@ -30,6 +30,13 @@ db.createUser({user: '$USER', pwd: '$PASS', roles:[{role:'dbOwner',db:'$DATABASE
 EOF
 fi
 
+
+
+mongo admin -u $USER -p $PASS << EOF
+use lqiong
+db.createUser({user: '$USER', pwd: '$PASS', roles:[{role:'clusterManager',db:'admin'},{role:'readAnyDatabase',db:'admin'}]})
+EOF
+
 echo "=> Done!"
 touch /data/db/.mongodb_password_set
 
