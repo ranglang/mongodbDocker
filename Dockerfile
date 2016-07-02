@@ -9,7 +9,6 @@ RUN echo "gpgcheck=1" >>/etc/yum.repos.d/mongodb-org-3.2.repo
 RUN echo "enabled=1">>/etc/yum.repos.d/mongodb-org-3.2.repo
 RUN echo "gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc">>/etc/yum.repos.d/mongodb-org-3.2.repo
 RUN  cat  /etc/yum.repos.d/mongodb-org-3.2.repo
-#RUN yum update -y
 RUN yum install -y mongodb-org
 RUN mkdir -p /data/db
 VOLUME /data/db
@@ -19,13 +18,12 @@ ENV STORAGE_ENGINE wiredTiger
 ENV JOURNALING yes
 
 ADD run.sh /run.sh
-RUN chmod 777 /run.sh
 ADD set_mongodb_password.sh /set_mongodb_password.sh
-RUN chmod 777 /set_mongodb_password.sh
 RUN ls
 RUN ls -l /
-
 WORKDIR /
+RUN chmod 777 /set_mongodb_password.sh
+RUN chmod 777 /run.sh
 
 EXPOSE 27017
 CMD ./run.sh
