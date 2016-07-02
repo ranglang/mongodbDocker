@@ -5,7 +5,7 @@ DATABASE=${MONGODB_DATABASE:-"admin"}
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
 
-ps aux |grep mongod
+# ps aux |grep mongod
 
 echo "########################################################"
 echo ${USER}
@@ -23,12 +23,12 @@ done
 
 # ps -aux |grep mongod
 
-ps -aux |grep mongod |awk '{print $4}' |kill -9
+# ps -aux |grep mongod |awk '{print $4}' |kill
 
 
-mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
-
-mongodb_cmd &
+# mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
+#
+# $mongodb_cmd &
 
 RET=1
 while [[ RET -ne 0 ]]; do
