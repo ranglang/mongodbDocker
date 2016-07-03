@@ -9,6 +9,9 @@ RUN echo 'baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.
 RUN echo "gpgcheck=1" >>/etc/yum.repos.d/mongodb-org-3.2.repo
 RUN echo "enabled=1">>/etc/yum.repos.d/mongodb-org-3.2.repo
 RUN echo "gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc">>/etc/yum.repos.d/mongodb-org-3.2.repo
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py" 
+RUN python get-pip.py
+RUN pip install mongo-connector
 RUN  cat  /etc/yum.repos.d/mongodb-org-3.2.repo
 RUN yum install -y mongodb-org
 RUN mkdir -p /data/db

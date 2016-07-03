@@ -43,6 +43,11 @@ use lqiong
 db.createUser({user: 'rang', pwd: 'wozhiaini070507', roles:[{role:'readWrite',db:'lqiong'}]})
 EOF
 
+mongo admin -u $USER -p $PASS << EOF
+use lqiong
+db.createUser({user: 'rang', pwd: 'wozhiaini070507', roles:[{role:'readWrite',db:'lqiong'}]})
+EOF
+
 ps aux | grep "[s]torageEngine" | awk '{print $2}' | xargs kill -9
 
 mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
@@ -71,15 +76,6 @@ EOF
 echo "=> Done!"
 touch /data/db/.mongodb_password_set
 
-curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-python get-pip.py
-pip install mongo-connector
-
-nohup mongo-connector -m mongodb://clusterAdmin:wozhiaini070507@localhost:27017 -t http://106.75.133.18:8983/solr/zuijin  -d solr_doc_manager -n lqiong.post,lqiong.topic --auto-commit-interval=0  --unique-key=id &
-
-sleep 5
-
-cat nohup.out
 
 echo "========================================================================"
 echo "You can now connect to this MongoDB server using:"

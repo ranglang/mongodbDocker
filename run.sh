@@ -1,7 +1,7 @@
 #!/bin/bash
 set -m
 
-mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE " ##--replSet rs0" ## 
+mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE " ##--replSet rs0" ##
 cmd="$mongodb_cmd --httpinterface --rest --master"
 if [ "$AUTH" == "yes" ]; then
     cmd="$cmd --auth"
@@ -21,4 +21,6 @@ if [ ! -f /data/db/.mongodb_password_set ]; then
     /set_mongodb_password.sh
 fi
 
-fg
+mongo-connector -m mongodb://clusterAdmin:wozhiaini070507@localhost:27017 -t http://106.75.133.18:8983/solr/zuijin  -d solr_doc_manager -n lqiong.post,lqiong.topic --auto-commit-interval=0  --unique-key=id
+
+# fg
