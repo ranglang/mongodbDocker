@@ -5,7 +5,6 @@ DATABASE=${MONGODB_DATABASE:-"admin"}
 PASS=${MONGODB_PASS:-$(pwgen -s 12 1)}
 _word=$( [ ${MONGODB_PASS} ] && echo "preset" || echo "random" )
 
-# ps aux |grep mongod
 
 RET=1
 while [[ RET -ne 0 ]]; do
@@ -22,15 +21,8 @@ echo ${DATABASE}
 echo ${PASS}
 echo ${_word}
 
-
-
-# ps -aux |grep storageEngine
-#
-# NUM=`ps -aux |grep "[s]torageEngine" |awk '{print $2}'`
-#
-# echo "returnnum: ${NUM}"
-# kill -9 ${num}
 echo "=> Creating an ${USER} user with a ${_word} password in MongoDB"
+
 mongo admin --eval "db.createUser({user: '$USER', pwd: '$PASS', roles:[{role:'root',db:'admin'}]});"
 
 if [ "$DATABASE" != "admin" ]; then
@@ -40,8 +32,6 @@ use $DATABASE
 db.createUser({user: '$USER', pwd: '$PASS', roles:[{role:'dbOwner',db:'$DATABASE'}]})
 EOF
 fi
-
-
 
 mongo admin -u $USER -p $PASS << EOF
 use admin
@@ -80,6 +70,16 @@ EOF
 
 echo "=> Done!"
 touch /data/db/.mongodb_password_set
+
+curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+python get-pip.py
+pip install mongo-connector
+
+nohup mongo-connector -m mongodb://clusterAdmin:wozhiaini070507@localhost:27017 -t http://106.75.133.18:8983/solr/zuijin  -d solr_doc_manager -n lqiong.post,lqiong.topic --auto-commit-interval=0  --unique-key=id &
+
+sleep 5
+
+cat nohup.out
 
 echo "========================================================================"
 echo "You can now connect to this MongoDB server using:"
