@@ -21,12 +21,14 @@ while [[ RET -ne 0 ]]; do
     RET=$?
 done
 
+ps aux | grep "[s]torageEngine" | awk '{print $2}' | xargs kill -9
+
 ps -aux |grep storageEngine
-
-NUM=`ps -aux |grep "[s]torageEngine" |awk '{print $2}'`
-
-echo "returnnum: ${NUM}"
-kill -9 ${num}
+#
+# NUM=`ps -aux |grep "[s]torageEngine" |awk '{print $2}'`
+#
+# echo "returnnum: ${NUM}"
+# kill -9 ${num}
 
 mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
 
