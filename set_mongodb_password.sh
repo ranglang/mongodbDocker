@@ -22,15 +22,7 @@ echo ${DATABASE}
 echo ${PASS}
 echo ${_word}
 
-RET=1
-while [[ RET -ne 0 ]]; do
-    echo "=> Waiting for confirmation of MongoDB service startup"
-    sleep 5
-    mongo admin --eval "help" >/dev/null 2>&1
-    RET=$?
-done
 
-ps aux | grep "[s]torageEngine" | awk '{print $2}' | xargs kill -9
 
 # ps -aux |grep storageEngine
 #
@@ -60,6 +52,8 @@ mongo admin -u $USER -p $PASS << EOF
 use lqiong
 db.createUser({user: 'rang', pwd: 'wozhiaini070507', roles:[{role:'readWrite',db:'lqiong'}]})
 EOF
+
+ps aux | grep "[s]torageEngine" | awk '{print $2}' | xargs kill -9
 
 mongodb_cmd="mongod --storageEngine $STORAGE_ENGINE --replSet rs0"
 
